@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './Phonebook.module.css';
 
 class AddContactForm extends Component {
   state = {
@@ -13,26 +14,25 @@ class AddContactForm extends Component {
 
  handleSubmit = (e) => {
     e.preventDefault();
+
     const { name, number } = this.state;
-    const { addContact, contacts } = this.props;
+    const isExist = this.props.contacts.some((contact) => contact.name === name);
 
-    if (name.trim() === '' || number.trim() === '') {
-      alert('Please enter both name and number.');
+    if (isExist) {
+        alert(`${name} is already in contacts.`);
+        this.setState({ name: '', number: '' });
       return;
     }
 
-    if (contacts.some((contact) => contact.name === name)) {
-      alert(`Contact with name "${name}" already exists.`);
-      return;
-    }
-
-    addContact(name, number);
+    this.props.addContact(name, number);
     this.setState({ name: '', number: '' });
   };
 
+
   render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
+      return (
+          <div className={styles.form_container}>
+              <form onSubmit={this.handleSubmit}>
         <h3>Name</h3>
         <input
           type="text"
@@ -42,6 +42,7 @@ class AddContactForm extends Component {
           required
           value={this.state.name}
           onChange={this.handleChange}
+          className={styles.input_field}
         />
         <h3>Number</h3>
         <input
@@ -52,9 +53,11 @@ class AddContactForm extends Component {
           required
           value={this.state.number}
           onChange={this.handleChange}
+          className={styles.input_field}
         />
-        <button type="submit">Add contact</button>
-      </form>
+        <button type="submit" className={styles.add_contact_button}>Add contact</button>
+      </form></div>
+      
     );
   }
 }
