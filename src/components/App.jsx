@@ -3,6 +3,7 @@ import ContactList from './Phonebook/ContactList';
 import Filter from './Phonebook/Filter';
 import { nanoid } from 'nanoid';
 import AddContactForm from './Phonebook/AddContactForm';
+import styles from './Phonebook/Phonebook.module.css';
 
 class App extends Component {
   state = {
@@ -45,7 +46,7 @@ class App extends Component {
     const filteredContacts = this.getFilteredContacts();
 
     return (
-      <div>
+      <div className={styles.container}>
         <h1>Phonebook</h1>
         <AddContactForm addContact={this.addContact} contacts={this.state.contacts} />
         <h2>Contacts</h2>
