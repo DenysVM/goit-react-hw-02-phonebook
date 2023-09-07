@@ -40,7 +40,7 @@ class App extends Component {
     return (
       <div>
         <h1>Phonebook</h1>
-        <AddContactForm addContact={this.addContact} />
+        <AddContactForm addContact={this.addContact} contacts={this.state.contacts} />
         <h2>Contacts</h2>
         <Filter filter={filter} onChange={this.handleFilterChange} />
         <ContactList contacts={filteredContacts} />

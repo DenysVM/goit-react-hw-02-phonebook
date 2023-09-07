@@ -11,15 +11,23 @@ class AddContactForm extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = (e) => {
+ handleSubmit = (e) => {
     e.preventDefault();
     const { name, number } = this.state;
-    const { addContact } = this.props;
+    const { addContact, contacts } = this.props;
 
-    if (name && number) {
-      addContact(name, number);
-      this.setState({ name: '', number: '' });
+    if (name.trim() === '' || number.trim() === '') {
+      alert('Please enter both name and number.');
+      return;
     }
+
+    if (contacts.some((contact) => contact.name === name)) {
+      alert(`Contact with name "${name}" already exists.`);
+      return;
+    }
+
+    addContact(name, number);
+    this.setState({ name: '', number: '' });
   };
 
   render() {
