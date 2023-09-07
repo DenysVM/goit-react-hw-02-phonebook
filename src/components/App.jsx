@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
-import ContactForm from './Phonebook/ContactForm';
 import ContactList from './Phonebook/ContactList';
+import Filter from './Phonebook/Filter';
 import { nanoid } from 'nanoid';
+import AddContactForm from './Phonebook/AddContactForm';
 
 class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
-    name: '',
-    number: '',
   };
 
   addContact = (name, number) => {
@@ -32,25 +26,23 @@ class App extends Component {
     this.setState({ filter: e.target.value.toLowerCase() });
   };
 
-  render() {
+  getFilteredContacts = () => {
     const { contacts, filter } = this.state;
-    const filteredContacts = contacts.filter((contact) =>
+    return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter)
     );
+  };
+
+  render() {
+    const { filter } = this.state;
+    const filteredContacts = this.getFilteredContacts();
 
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm addContact={this.addContact} />
+        <AddContactForm addContact={this.addContact} />
         <h2>Contacts</h2>
-        <label>
-          Find contacts by name:
-          <input
-            type="text"
-            value={filter}
-            onChange={this.handleFilterChange}
-          />
-        </label>
+        <Filter filter={filter} onChange={this.handleFilterChange} />
         <ContactList contacts={filteredContacts} />
       </div>
     );
