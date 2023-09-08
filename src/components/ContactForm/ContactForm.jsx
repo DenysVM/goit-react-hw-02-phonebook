@@ -1,38 +1,28 @@
 import React, { Component } from 'react';
-import styles from './Phonebook.module.css';
+import styles from '../Phonebook.module.css';
 
-class AddContactForm extends Component {
+class ContactForm extends Component {
   state = {
-    name: '',
-    number: '',
+      name: '',
+      number: '',
   };
 
   handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
+  const { name, value } = e.target;
+  this.setState({ [name]: value });
+};
+
 
  handleSubmit = (e) => {
-    e.preventDefault();
-
-    const { name, number } = this.state;
-    const isExist = this.props.contacts.some((contact) => contact.name === name);
-
-    if (isExist) {
-        alert(`${name} is already in contacts.`);
-        this.setState({ name: '', number: '' });
-      return;
-    }
-
-    this.props.addContact(name, number);
-    this.setState({ name: '', number: '' });
-  };
+  e.preventDefault();
+  this.props.addContact(this.state.name, this.state.number); 
+  this.setState({ name: '', number: '' });
+};
 
 
   render() {
-      return (
-          <div className={styles.form_container}>
-              <form onSubmit={this.handleSubmit}>
+    return (
+      <form onSubmit={this.handleSubmit} className={styles.form_container}>
         <h3>Name</h3>
         <input
           type="text"
@@ -43,12 +33,12 @@ class AddContactForm extends Component {
           value={this.state.name}
           onChange={this.handleChange}
           className={styles.input_field}
-        />
-        <h3>Number</h3>
+            />
+            <h3>Number</h3>
         <input
           type="tel"
           name="number"
-          pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
+         pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           value={this.state.number}
@@ -56,10 +46,9 @@ class AddContactForm extends Component {
           className={styles.input_field}
         />
         <button type="submit" className={styles.add_contact_button}>Add contact</button>
-      </form></div>
-      
+      </form>
     );
   }
 }
 
-export default AddContactForm;
+export default ContactForm;

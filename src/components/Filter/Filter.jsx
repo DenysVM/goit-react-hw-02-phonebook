@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Phonebook.module.css';
+import styles from '../Phonebook.module.css';
 
 const Filter = ({ filter, onChange }) => (
     <div className={styles.form_container}>
