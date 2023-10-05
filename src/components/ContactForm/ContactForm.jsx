@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
-import styles from '../Phonebook.module.css';
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../..//redux/contactsSlice'; 
+import styles from './/../Phonebook.module.css'
+import { getContacts } from 'redux/helpers';
 
-const ContactForm = ({ addContact }) => {
+
+const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+
   const [formData, setFormData] = useState({
     name: '',
     number: '',
@@ -14,14 +22,35 @@ const ContactForm = ({ addContact }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addContact(formData.name, formData.number);
+
+    const { name, number } = formData;
+
+    if (name.trim() === '' || number.trim() === '') {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    if (contacts.some((contact) => contact.name === name)) {
+      alert(`${name} is already in your contacts`);
+      return;
+    }
+
+    dispatch(
+      addContact({
+        id: nanoid(),
+        name,
+        number,
+      })
+    );
+
     setFormData({ name: '', number: '' });
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.form_container}>
-      <h3>Name</h3>
-      <input
+      
+        <h3>Name</h3>
+        <input
         type="text"
         name="name"
         pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -31,8 +60,9 @@ const ContactForm = ({ addContact }) => {
         onChange={handleChange}
         className={styles.input_field}
       />
-      <h3>Number</h3>
-      <input
+           
+        <h3>Number</h3>
+        <input
         type="tel"
         name="number"
         pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
@@ -42,6 +72,7 @@ const ContactForm = ({ addContact }) => {
         onChange={handleChange}
         className={styles.input_field}
       />
+      
       <button type="submit" className={styles.add_contact_button}>
         Add contact
       </button>
