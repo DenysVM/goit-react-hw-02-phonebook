@@ -2,10 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from '..//..//redux/contactsSlice';
 import styles from '../Phonebook.module.css';
+import { getContacts, getFilter } from 'redux/helpers';
 
 const ContactList = () => {
-  const contacts = useSelector((state) => state.contacts);
-  const filter = useSelector((state) => state.filter); 
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter); 
   const dispatch = useDispatch();
 
     const filteredContacts = contacts.filter((contact) =>
