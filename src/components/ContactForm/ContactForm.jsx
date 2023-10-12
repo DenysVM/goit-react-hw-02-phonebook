@@ -3,12 +3,12 @@ import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '..//../redux/operations'; 
 import styles from './/../Phonebook.module.css'
-import { getContacts } from 'redux/helpers';
+import { selectContacts } from 'redux/selectors';
 
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -35,30 +35,37 @@ const ContactForm = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const { name, phone } = formData;
+  const { name, phone } = formData;
+  const digitsCount = phone.replace(/\D/g, '').length;
 
-    if (name.trim() === '' || phone.trim() === '') {
-      alert('Please fill in all fields');
-      return;
-    }
+  if (name.trim() === '' || phone.trim() === '') {
+    alert('Please fill in all fields');
+    return;
+  }
 
-    if (contacts.some((contact) => contact.name === name)) {
-      alert(`${name} is already in your contacts`);
-      return;
-    }
+  if (digitsCount < 10) {
+    alert('Phone number must contain at least 10 digits');
+    return;
+  }
 
-    dispatch(
-      addContact({
-        id: nanoid(),
-        name,
-        phone,
-      })
-    );
+  if (contacts.some((contact) => contact.name === name)) {
+    alert(`${name} is already in your contacts`);
+    return;
+  }
 
-    setFormData({ name: '', phone: '' });
-  };
+  dispatch(
+    addContact({
+      id: nanoid(),
+      name,
+      phone,
+    })
+  );
+
+  setFormData({ name: '', phone: '' });
+};
+
 
   return (
     <form onSubmit={handleSubmit} className={styles.form_container}>
@@ -80,7 +87,7 @@ const ContactForm = () => {
         type="tel"
         name="phone"
         pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+  title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +. Minimum 10 digits required."
         required
         value={formData.phone}
         onChange={handleChange}

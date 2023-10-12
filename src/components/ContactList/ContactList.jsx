@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchContacts, deleteContact } from 'redux/operations';
 import styles from '../Phonebook.module.css';
-import { getContacts, getFilter } from 'redux/helpers';
+import { selectContacts, selectFilter } from 'redux/selectors';
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter); 
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter); 
   const dispatch = useDispatch();
 
   useEffect(() => {
