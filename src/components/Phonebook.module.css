@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   margin: 0 auto;
 }
 
@@ -50,21 +49,26 @@ ul {
 }
 
 .contact_item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 340px;
-  white-space: normal;
-  word-wrap: break-word;
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   padding: 10px;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 7px;
+  position: relative;
+}
+
+.contact_item .name,
+.contact_item .phone {
+  display: inline;
 }
 
 .delete_button {
-  margin-left: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5px;
+  margin-left: auto;
   background-color: #dc3545;
   color: #fff;
   border: none;

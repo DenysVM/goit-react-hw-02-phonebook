@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../..//redux/contactsSlice'; 
+import { addContact } from '..//../redux/operations'; 
 import styles from './/../Phonebook.module.css'
 import { getContacts } from 'redux/helpers';
 
@@ -12,20 +12,34 @@ const ContactForm = () => {
 
   const [formData, setFormData] = useState({
     name: '',
-    number: '',
+    phone: '',
   });
+
+  const formatPhoneNumber = (phoneNumber) => {
+  const cleaned = phoneNumber.replace(/\D/g, '');
+  const formatted = cleaned.substring(0, 10);
+  const regex = /^(\d{3})(\d{3})(\d{4})$/;
+  const formattedNumber = formatted.replace(regex, '$1-$2-$3');
+  return formattedNumber;
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    
+    if (name === 'phone') {
+      const formattedPhone = formatPhoneNumber(value);
+      setFormData({ ...formData, [name]: formattedPhone });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { name, number } = formData;
+    const { name, phone } = formData;
 
-    if (name.trim() === '' || number.trim() === '') {
+    if (name.trim() === '' || phone.trim() === '') {
       alert('Please fill in all fields');
       return;
     }
@@ -39,11 +53,11 @@ const ContactForm = () => {
       addContact({
         id: nanoid(),
         name,
-        number,
+        phone,
       })
     );
 
-    setFormData({ name: '', number: '' });
+    setFormData({ name: '', phone: '' });
   };
 
   return (
@@ -64,11 +78,11 @@ const ContactForm = () => {
         <h3>Number</h3>
         <input
         type="tel"
-        name="number"
+        name="phone"
         pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
-        value={formData.number}
+        value={formData.phone}
         onChange={handleChange}
         className={styles.input_field}
       />
