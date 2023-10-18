@@ -1,10 +1,4 @@
-.login-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.login-form {
+.register-form {
   width: 320px;
   margin: 20px auto;
   padding: 20px;
@@ -14,35 +8,33 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.login-form h2 {
+.register-form h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-.login-form label {
+.register-form label {
   display: block;
   margin: 10px 0 5px;
 }
 
-.login-form input {
+.register-form input {
   width: 90%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.login-form button {
+.register-form button {
   background-color: #007bff;
-  margin-top: 10px;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  align-self: center;
 }
 
-.login-form button:hover {
+.register-form button:hover {
   background-color: #0056b3;
 }
