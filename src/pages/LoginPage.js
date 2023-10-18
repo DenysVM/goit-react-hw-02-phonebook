@@ -7,7 +7,7 @@ const LoginPage = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        // Добавьте вашу логику входа здесь
+
     };
 
     return (
