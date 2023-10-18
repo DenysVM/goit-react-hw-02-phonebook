@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/50.0f0d13db.chunk.js","mappings":"qKAUA,UARqB,WACjB,OACI,kBAIP,C","sources":["pages/RegisterPage.js"],"sourcesContent":["import React from 'react';\n\nconst RegisterPage = () => {\n    return (\n        <div>\n            {/* Форма регистрации */}\n        </div>\n    );\n};\n\nexport default RegisterPage;\n"],"names":[],"sourceRoot":""}
