@@ -38,4 +38,4 @@ const authSlice = createSlice({
     },
 });
 export const authReducer = persistReducer(persistConfig, authSlice.reducer);
-// export default authSlice.reducer;
+
