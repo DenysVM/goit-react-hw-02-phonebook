@@ -1,37 +1,64 @@
 import React, { useState } from 'react';
-import '../components/LoginForm/LoginFormStyles.css'
+import { useDispatch } from 'react-redux';
+import { authOperations } from 'redux/Auth/authOperations';
+import '../LoginForm/LoginFormStyles.css'
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = () => {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const handleChange = ({ target: { id, value } }) => {
+        switch (id) {
+            case 'email':
+                return setEmail(value);
+            case 'password':
+                return setPassword(value);
+            default:
+                return;
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        onLogin(email, password);
+        dispatch(authOperations.logIn({ email, password }));
+        setEmail('');
+        setPassword('');
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Email:
+        <div className="login-container">
+            <form className="login-form" onSubmit={handleSubmit} autoComplete='off'>
+                <h2 className="login-heading">Login</h2>
+                <label htmlFor="email" className="login-label">
+                    Email:
+                </label>
                 <input
                     type="email"
+                    id="email"
+                    className="login-input"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={handleChange}
                     required
+                    autoComplete="email"
                 />
-            </label>
-            <label>
-                Password:
+                <label htmlFor="password" className="login-label">
+                    Password:
+                </label>
                 <input
                     type="password"
+                    id="password"
+                    className="login-input"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={handleChange}
                     required
+                    autoComplete="current-password"
                 />
-            </label>
-            <button type="submit">Login</button>
-        </form>
+                <button type="submit" className="login-button">
+                    Login
+                </button>
+            </form>
+        </div>
     );
 };
 

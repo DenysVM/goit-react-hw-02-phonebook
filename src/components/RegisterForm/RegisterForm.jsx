@@ -10,8 +10,8 @@ const RegisterForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
+  const handleChange = ({ target: { id, value } }) => {
+    switch (id) {
       case 'name':
         return setName(value);
       case 'email':
@@ -36,15 +36,15 @@ const RegisterForm = () => {
       <h2>Registration</h2>
       <label>
         Username:
-        <input type="text" name="name" value={name} onChange={handleChange}/>
+        <input type="text" id="name" value={name} onChange={handleChange} autoComplete="name"/>
       </label>
       <label>
         Email:
-        <input type="email" name="email" value={email} onChange={handleChange}/>
+        <input type="email" id="email" value={email} onChange={handleChange} autoComplete="email"/>
       </label>
       <label>
         Password:
-        <input type="password" name="password" value={password} onChange={handleChange}/>
+        <input type="password" id="password" value={password} onChange={handleChange} autoComplete="current-password"/>
       </label>
       <button type="submit">Register</button>
     </form>

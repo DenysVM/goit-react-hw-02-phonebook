@@ -1,45 +1,12 @@
-import React, { useState } from 'react';
+// LoginPage.js
+import React from 'react';
+import LoginForm from '../components/LoginForm/LoginForm.jsx';
 import '../components/LoginForm/LoginFormStyles.css'
 
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const handleLogin = (e) => {
-        e.preventDefault();
-
-    };
-
     return (
-        <div className="login-container">
-            <form className="login-form" onSubmit={handleLogin}>
-                <h2 className="login-heading">Login</h2>
-                <label htmlFor="email" className="login-label">
-                    Email:
-                </label>
-                <input
-                    type="email"
-                    id="email"
-                    className="login-input"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <label htmlFor="password" className="login-label">
-                    Password:
-                </label>
-                <input
-                    type="password"
-                    id="password"
-                    className="login-input"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit" className="login-button">
-                    Login
-                </button>
-            </form>
+        <div className="login-page">
+            <LoginForm />
         </div>
     );
 };
