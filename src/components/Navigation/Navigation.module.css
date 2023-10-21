@@ -32,37 +32,50 @@
 
 .navLink {
   text-decoration: none;
-  color: #fff;
+  color: #333;
+  background-color: #f0f0f0;
   font-size: 16px;
   margin: 0 20px 0;
   padding: 5px 10px;
   border-radius: 5px;
-  background-color: #555;
-  transition: background-color 0.3s;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 
   &:hover {
     background-color: #777;
+    color: #ffffff;
   }
+}
+
+.navUserMenu {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
 .welcomeText {
   font-size: 16px;
   color: #333;
-  margin-bottom: 10px;
+  background-color: #f0f0f0;
+  padding: 8px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .logOutButton {
-  background-color: #555;
-  color: #fff;
+  color: #333;
+  background-color: #f0f0f0;
   font-size: 16px;
-  margin: 8px 20px 8px;
+  margin: 16px 20px 16px;
   padding: 5px 10px;
   border-radius: 5px;
-  transition: background-color 0.3s;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  border: none;
   cursor: pointer;
 
   &:hover {
     background-color: #777;
+    color: #ffffff;
   }
 }
 

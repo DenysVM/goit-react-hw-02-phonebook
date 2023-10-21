@@ -16,7 +16,7 @@ const UserMenu = () => {
     };
 
     return (
-        <div className={styles.authLinks}>
+        <div className={styles.navUserMenu}>
             <p className={styles.welcomeText}>Welcome, {name}</p>
             <button onClick={handleLogout} className={styles.logOutButton}>Logout</button>
         </div>

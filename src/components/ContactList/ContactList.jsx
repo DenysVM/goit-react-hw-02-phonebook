@@ -28,11 +28,12 @@ const ContactList = () => {
             <strong>Name:</strong> {contact.name}, <br />
           </p>
           <p className="contact-phone">
-            <strong>Number:</strong> {contact.phone}
+            <strong>Number:</strong> {contact.number}
           </p>
-          <button onClick={() => dispatch(deleteContact(contact.id))} className="delete-button">
-            Delete
-          </button>
+          <div className="button-container">
+            <button className="edit-button"> Edit </button>
+            <button onClick={() => dispatch(deleteContact(contact.id))} className="delete-button"> Delete </button>
+          </div>
         </li>
       ))}
     </ul>

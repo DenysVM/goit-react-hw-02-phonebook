@@ -64,12 +64,28 @@
   cursor: pointer;
 }
 
-.delete-button {
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   right: 5px;
   margin-left: auto;
+}
+
+.edit-button {
+  background-color: #b2b2b2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.delete-button {
   background-color: #b2b2b2;
   color: #fff;
   border: none;
@@ -84,7 +100,10 @@
   background-color: #98db9c;
 }
 
-.delete-button:hover,
-.delete-button:focus {
+.delete-button:hover {
   background-color: #b30000;
+}
+
+.edit-button:hover {
+  background-color: #d3d609;
 }

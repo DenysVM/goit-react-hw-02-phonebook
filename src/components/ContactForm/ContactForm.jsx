@@ -11,7 +11,7 @@ const ContactForm = () => {
 
   const [formData, setFormData] = useState({
     name: '',
-    phone: '',
+    number: '',
   });
 
   const formatPhoneNumber = (phoneNumber) => {
@@ -25,7 +25,7 @@ const ContactForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'phone') {
+    if (name === 'number') {
       const formattedPhone = formatPhoneNumber(value);
       setFormData({ ...formData, [name]: formattedPhone });
     } else {
@@ -36,10 +36,10 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { name, phone } = formData;
-    const digitsCount = phone.replace(/\D/g, '').length;
+    const { name, number } = formData;
+    const digitsCount = number.replace(/\D/g, '').length;
 
-    if (name.trim() === '' || phone.trim() === '') {
+    if (name.trim() === '' || number.trim() === '') {
       alert('Please fill in all fields');
       return;
     }
@@ -58,11 +58,11 @@ const ContactForm = () => {
       addContact({
         id: nanoid(),
         name,
-        phone,
+        number,
       })
     );
 
-    setFormData({ name: '', phone: '' });
+    setFormData({ name: '', number: '' });
   };
 
   return (
@@ -81,11 +81,11 @@ const ContactForm = () => {
       <h3>Number</h3>
       <input
         type="tel"
-        name="phone"
+        name="number"
         pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +. Minimum 10 digits required."
         required
-        value={formData.phone}
+        value={formData.number}
         onChange={handleChange}
         className="input-field"
       />
