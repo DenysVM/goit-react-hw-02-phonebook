@@ -95,8 +95,7 @@
   cursor: pointer;
 }
 
-.add-contact-button:hover,
-.add-contact-button:focus {
+.add-contact-button:hover {
   background-color: #98db9c;
 }
 
