@@ -61,7 +61,7 @@ const EditContactModal = ({ contact, onClose, onUpdate }) => {
     return () => {
       window.removeEventListener('keydown', handleEscapeKey);
     };
-  }, []);
+  }, );
 
   return (
     <div className="modal" onClick={handleModalClick}>
