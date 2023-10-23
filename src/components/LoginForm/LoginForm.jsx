@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/Auth/authOperations';
 import '../LoginForm/LoginFormStyles.css'
+import { useNavigate  } from 'react-router-dom';
 
 const LoginForm = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate ();
 
     const handleChange = ({ target: { id, value } }) => {
         switch (id) {
@@ -21,7 +23,9 @@ const LoginForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(authOperations.logIn({ email, password }));
+        dispatch(authOperations.logIn({ email, password })).then(() => {
+        navigate('/contacts');
+  });;
         setEmail('');
         setPassword('');
     };

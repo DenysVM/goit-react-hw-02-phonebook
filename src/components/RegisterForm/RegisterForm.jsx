@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './RegisterFormStyles.css';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '..//../redux/Auth/authOperations';
+import { useNavigate  } from 'react-router-dom';
 
 const RegisterForm = () => {
 
@@ -9,6 +10,7 @@ const RegisterForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate ();
 
   const handleChange = ({ target: { id, value } }) => {
     switch (id) {
@@ -24,12 +26,15 @@ const RegisterForm = () => {
    };
 
   const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(authOperations.register({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');   
-  }
+  e.preventDefault();
+  dispatch(authOperations.register({ name, email, password })).then(() => {
+    navigate('/home');
+  });
+  setName('');
+  setEmail('');
+  setPassword('');   
+}
+
   
   return (
     <form onSubmit={handleSubmit} className="register-form" autoComplete='off'>
